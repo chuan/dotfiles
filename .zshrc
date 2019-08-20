@@ -1,6 +1,6 @@
 export EDITOR="vim"
 
-source $HOME/.antigen/antigen.zsh
+source $HOME/.antigen/bundles/zsh-users/antigen/antigen.zsh
 # Prompt
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
