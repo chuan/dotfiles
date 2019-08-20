@@ -68,7 +68,6 @@ install_mac() {
     brew ls --versions fd || brew install fd
     brew ls --versions ripgrep || brew install ripgrep
     brew ls --versions zsh || brew install zsh
-    brew ls --versions antigen || brew install antigen
     brew ls --versions tmux || brew install tmux
     brew ls --versions macvim || brew install macvim
 }
@@ -101,6 +100,9 @@ install_linux() {
 }
 
 config_zsh() {
+    if [[ ! -d $HOME/.antigen ]]; then
+        git clone https://github.com/zsh-users/antigen.git ~/.antigen
+    fi
     ln -f -s ${DOTFILES_DIR}/.zshrc ${HOME}
 }
 

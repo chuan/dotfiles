@@ -1,16 +1,6 @@
 export EDITOR="vim"
 
-case "$OSTYPE" in
-  darwin*)
-    export LSCOLORS="ExGxFxdxCxDxDxhbadExEx"
-    alias ls="ls -G"
-    source /usr/local/share/antigen/antigen.zsh
-    ;;
-  linux*)
-    alias ls="ls --color=auto"
-    source $HOME/.antigen/antigen.zsh
-    ;;
-esac
+source $HOME/.antigen/antigen.zsh
 # Prompt
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
@@ -29,6 +19,17 @@ rg() {
 }
 
 bindkey -e
+
+case "$OSTYPE" in
+  darwin*)
+    export LSCOLORS="ExGxFxdxCxDxDxhbadExEx"
+    alias ls="ls -G"
+    ;;
+  linux*)
+    alias ls="ls --color=auto"
+    alias fd="fdfind"
+    ;;
+esac
 
 [ -d $HOME/.cargo/bin ] && export PATH="$HOME/.cargo/bin:$PATH"
 
