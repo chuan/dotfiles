@@ -13,6 +13,7 @@ main() {
 
     DOTFILES_DIR="$(realpath ${BIN_DIR}/..)"
 
+
     echo "Configuring zsh..."
     config_zsh
 
@@ -24,6 +25,9 @@ main() {
 
     echo "Configuring emacs..."
     config_emacs
+
+    echo "Configuring alacritty..."
+    config_alacritty
 
     echo "Done."
 }
@@ -47,7 +51,7 @@ install() {
 }
 
 give_up() {
-  echo "Unsupported distribution '$UNAME' - '$DISTRO'"
+  echo "Unsupported OS '$UNAME' - '$DISTRO'"
   exit 1
 }
 
@@ -68,13 +72,16 @@ install_mac() {
     brew ls --versions antigen || brew install antigen
     brew ls --versions tmux || brew install tmux
     brew ls --versions fzf || brew install fzf
-
 }
 
-config_mac() {
-    # Need a macOS only config to workaround alt shortcuts
-    makedir -p $HOME/.config/alacritty
-    ln -f -s ${DOTFILES_DIR}/alacritty.yml $HOME/.config/alacritty
+config_alacritty() {
+  UNAME=$(uname | tr "[:lower:]" "[:upper:]")
+  case $UNAME in
+    DARWIN)
+      mkdir -p $HOME/.config/alacritty && \
+        ln -f -s ${DOTFILES_DIR}/alacritty.yml $HOME/.config/alacritty
+      ;;
+  esac
 }
 
 install_linux() {

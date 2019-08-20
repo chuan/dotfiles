@@ -1,11 +1,19 @@
-if [[ -f /usr/local/share/antigen/antigen.zsh ]]; then
+
+case "$OSTYPE" in
+  darwin*)
+    export LSCOLORS="ExGxFxdxCxDxDxhbadExEx"
+    alias ls="ls -G"
+    source /usr/local/Cellar/fzf/0.18.0/shell/completion.zsh
+    source /usr/local/Cellar/fzf/0.18.0/shell/key-bindings.zsh
     source /usr/local/share/antigen/antigen.zsh
-elif [[ -f $HOME/.antigen/antigen.zsh ]]; then
+    ;;
+  linux*)
+    alias ls="ls --color=auto"
+    source /usr/share/zsh/vendor-completions/_fzf
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
     source $HOME/.antigen/antigen.zsh
-fi
-
-bindkey -e
-
+    ;;
+esac
 # Prompt
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
@@ -19,16 +27,9 @@ antigen bundle rupa/z
 # End of plugins
 antigen apply
 
-if [[ -d ~/.fzf/shell ]]; then
-  . ~/.fzf/shell/completion.zsh
-  . ~/.fzf/shell/key-bindings.zsh
-else
-  [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]] && . /usr/share/doc/fzf/examples/key-bindings.zsh
-  [[ -f /usr/share/zsh/vendor-completions/_fzf ]] && . /usr/share/zsh/vendor-completions/_fzf
-fi
-
 rg() {
   command rg -p "$@" | less -RFX
 }
 
-alias ls="ls --color=auto"
+bindkey -e
+
