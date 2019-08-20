@@ -11,12 +11,12 @@ map <C-n> :NERDTreeToggle<CR>
 Plug 'vim-airline/vim-airline'
 let g:airline_theme='dark'
 
-" Javascript
-"Plug 'pangloss/vim-javascript'
-"Plug 'elzr/vim-json'
+" fzf
+Plug 'junegunn/fzf', { 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-" Golang
-"Plug 'fatih/vim-go'
+" Git
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 

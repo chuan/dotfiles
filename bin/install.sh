@@ -71,7 +71,6 @@ install_mac() {
     brew ls --versions zsh || brew install zsh
     brew ls --versions antigen || brew install antigen
     brew ls --versions tmux || brew install tmux
-    brew ls --versions fzf || brew install fzf
 }
 
 config_alacritty() {
@@ -87,7 +86,7 @@ config_alacritty() {
 install_linux() {
     sudo apt-get update && sudo apt-get -y upgrade
     sudo apt-get -y install aptitude
-    sudo aptitude -y install fd-find ripgrep zsh tmux fzf vim
+    sudo aptitude -y install fd-find ripgrep zsh tmux vim
 
     BAT_LATEST_VERSION=0.11.0
     BAT_INSTALLED_VERSION=$(dpkg-query -W bat 2>/dev/null | awk '{ print $2 }')
@@ -115,12 +114,13 @@ config_vim() {
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
     ln -f -s ${DOTFILES_DIR}/.vimrc ${HOME}
+    vim +'PlugInstall --sync' +qa
 }
 
 config_emacs() {
     if [[ ! -d $HOME/.emacs.d ]]; then
         git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-        echo "Run the following command after emacs installation:"
+        echo "Run the following command to setup doom:"
         echo "~/.emacs.d/bin/doom -i quickstart"
     fi
 }
