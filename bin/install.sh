@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-DOTFILES_DIR="$(realpath ${BIN_DIR}/..)"
 
 main() {
     set -o errexit
@@ -11,6 +10,8 @@ main() {
         Y|y) install;;
         *) ;;
     esac
+
+    DOTFILES_DIR="$(realpath ${BIN_DIR}/..)"
 
     echo "Configuring zsh..."
     config_zsh
@@ -28,7 +29,6 @@ main() {
 }
 
 install() {
-    set -x
     UNAME=$(uname | tr "[:lower:]" "[:upper:]")
 
     case $UNAME in
@@ -47,7 +47,6 @@ install() {
 }
 
 give_up() {
-  set +x
   echo "Unsupported distribution '$UNAME' - '$DISTRO'"
   exit 1
 }
@@ -70,9 +69,12 @@ install_mac() {
     brew ls --versions tmux || brew install tmux
     brew ls --versions fzf || brew install fzf
 
+}
+
+config_mac() {
     # Need a macOS only config to workaround alt shortcuts
     makedir -p $HOME/.config/alacritty
-    ln -s ${DOTFILES_DIR}/alacritty.yml $HOME/.config/alacritty
+    ln -f -s ${DOTFILES_DIR}/alacritty.yml $HOME/.config/alacritty
 }
 
 install_linux() {
@@ -93,25 +95,27 @@ install_linux() {
 }
 
 config_zsh() {
-    ln -s ${DOTFILES_DIR}/.zshrc ${HOME}
+    ln -f -s ${DOTFILES_DIR}/.zshrc ${HOME}
 }
 
 config_tmux() {
-    ln -s ${DOTFILES_DIR}/.tmux.conf ${HOME}
+    ln -f -s ${DOTFILES_DIR}/.tmux.conf ${HOME}
 }
 
 config_vim() {
-    if [[ -f  ~/.vim/autoload/plug.vim ]]; then
+    if [[ ! -f  ~/.vim/autoload/plug.vim ]]; then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
-    ln -s ${DOTFILES_DIR}/.vimrc ${HOME}
+    ln -f -s ${DOTFILES_DIR}/.vimrc ${HOME}
 }
 
 config_emacs() {
-    git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-    echo "Run the following command after emacs installation:"
-    echo "~/.emacs.d/bin/doom -i quickstart"
+    if [[ ! -d $HOME/.emacs.d ]]; then
+        git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+        echo "Run the following command after emacs installation:"
+        echo "~/.emacs.d/bin/doom -i quickstart"
+    fi
 }
 
 main "$@"
