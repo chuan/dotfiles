@@ -13,7 +13,6 @@ main() {
 
     DOTFILES_DIR="$(realpath ${BIN_DIR}/..)"
 
-
     echo "Configuring zsh..."
     config_zsh
 
@@ -71,6 +70,7 @@ install_mac() {
     brew ls --versions zsh || brew install zsh
     brew ls --versions antigen || brew install antigen
     brew ls --versions tmux || brew install tmux
+    brew ls --versions macvim || brew install macvim
 }
 
 config_alacritty() {

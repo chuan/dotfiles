@@ -15,7 +15,6 @@ Dev envrionment configuration files install/backup/restore
 ### Mac 
 
 ```bash
-brew ls --versions vim || brew install brew
 brew cask ls --versions alacritty || brew cask install alacritty
 brew cask ls --versions emacs || brew cask install emacs
 ```
