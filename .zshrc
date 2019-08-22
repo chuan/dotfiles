@@ -1,6 +1,7 @@
 export EDITOR="vim"
 
 source $HOME/.antigen/bundles/zsh-users/antigen/antigen.zsh
+antigen bundle yous/vanilli.sh
 # Prompt
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
@@ -30,6 +31,8 @@ case "$OSTYPE" in
     alias fd="fdfind"
     ;;
 esac
+
+alias rsync="rsync -avz"
 
 [ -d $HOME/.cargo/bin ] && export PATH="$HOME/.cargo/bin:$PATH"
 
