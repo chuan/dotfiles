@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 main() {
   set -o errexit
   echo "Updating packages..."
@@ -8,6 +10,11 @@ main() {
     Y|y) update;;
     *) ;;
   esac
+
+  echo "Self updating..."
+  pushd ${BIN_DIR}/..
+  git pull
+  popd
 
   echo "Updating zsh..."
   zsh -i -c "antigen update"

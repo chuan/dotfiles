@@ -70,6 +70,7 @@ install_mac() {
   brew ls --versions zsh || brew install zsh
   brew ls --versions tmux || brew install tmux
   brew ls --versions macvim || brew install macvim
+  brew ls --versions editorconfig || brew install editorconfig
 }
 
 config_alacritty() {
