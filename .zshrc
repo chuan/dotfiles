@@ -15,6 +15,8 @@ antigen bundle rupa/z
 # End of plugins
 antigen apply
 
+alias rsync="rsync -avz"
+
 rg() {
   command rg -p "$@" | less -RFX
 }
@@ -25,14 +27,18 @@ case "$OSTYPE" in
   darwin*)
     export LSCOLORS="ExGxFxdxCxDxDxhbadExEx"
     alias ls="ls -G"
+    export GOROOT=/usr/local/opt/go/libexec
     ;;
   linux*)
     alias ls="ls --color=auto"
     alias fd="fdfind"
+    export GOROOT=/usr/lib/go
     ;;
 esac
 
-alias rsync="rsync -avz"
+export GOPATH=$HOME/Go
+[ -d $GOPATH ] && export PATH=$PATH:$GOPATH/bin
+[ -d $GOROOT ] && export PATH=$PATH:$GOROOT/bin
 
 [ -d $HOME/.cargo/bin ] && export PATH="$HOME/.cargo/bin:$PATH"
 

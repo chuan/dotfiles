@@ -101,8 +101,8 @@ install_linux() {
 }
 
 config_zsh() {
-  if [[ ! -d $HOME/.antigen ]]; then
-    mkdir -p $HOME/.antigen/bundles/zsh-users
+  if [[ ! -d $HOME/.antigen/bundles/zsh-users/antigen ]]; then
+    mkdir -p $HOME/.antigen/bundles/zsh-users/antigen
     git clone https://github.com/zsh-users/antigen.git $HOME/.antigen/bundles/zsh-users/antigen
   fi
   ln -f -s ${DOTFILES_DIR}/.zshrc ${HOME}
