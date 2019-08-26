@@ -109,8 +109,8 @@ config_vim() {
 config_emacs() {
   if [[ ! -d $HOME/.emacs.d ]]; then
     git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-    echo "Run the following command to setup doom:"
-    echo "~/.emacs.d/bin/doom -i quickstart"
+    git -C ~/.emacs.d checkout develop
+    ~/.emacs.d/bin/doom -i quickstart
   fi
 }
 
