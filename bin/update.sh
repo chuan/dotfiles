@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $(dirname $(which $0))/env.sh
 
 main() {
   set -o errexit
@@ -12,9 +12,7 @@ main() {
   esac
 
   echo "Self updating..."
-  pushd ${BIN_DIR}/..
-  git pull
-  popd
+  git -C ${DOTFILES_DIR} pull
 
   echo "Updating zsh..."
   zsh -i -c "antigen update"
@@ -26,25 +24,15 @@ main() {
 }
 
 update() {
-  UNAME=$(uname | tr "[:lower:]" "[:upper:]")
-
-  case $UNAME in
-    DARWIN) update_mac ;;
-
-    LINUX)
-      DISTRO=$(cat /etc/os-release | grep ^ID= | cut -d '=' -f 2)
-      case $DISTRO in
-        ubuntu) update_linux ;;
-        *) give_up ;;
-      esac
-      ;;
-
+  case $(_os) in
+    macos) update_mac ;;
+    debian) update_linux ;;
     *) give_up ;;
   esac
 }
 
 give_up() {
-  echo "Unsupported OS '$UNAME' - '$DISTRO'"
+  echo "Unsupported OS"
   exit 1
 }
 

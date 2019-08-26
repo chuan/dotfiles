@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $(dirname $(which $0))/env.sh
 
 main() {
   set -o errexit
@@ -10,8 +10,6 @@ main() {
     Y|y) install;;
     *) ;;
   esac
-
-  DOTFILES_DIR="$(realpath ${BIN_DIR}/..)"
 
   echo "Configuring zsh..."
   config_zsh
@@ -32,25 +30,15 @@ main() {
 }
 
 install() {
-  UNAME=$(uname | tr "[:lower:]" "[:upper:]")
-
-  case $UNAME in
-    DARWIN) install_mac ;;
-
-    LINUX)
-      DISTRO=$(cat /etc/os-release | grep ^ID= | cut -d '=' -f 2)
-      case $DISTRO in
-        ubuntu) install_linux ;;
-        *) give_up ;;
-      esac
-      ;;
-
+  case $(_os) in
+    macos) install_mac ;;
+    debian) install_linux ;;
     *) give_up ;;
   esac
 }
 
 give_up() {
-  echo "Unsupported OS '$UNAME' - '$DISTRO'"
+  echo "Unsupported OS."
   exit 1
 }
 
@@ -74,13 +62,10 @@ install_mac() {
 }
 
 config_alacritty() {
-  UNAME=$(uname | tr "[:lower:]" "[:upper:]")
-  case $UNAME in
-    DARWIN)
-      mkdir -p $HOME/.config/alacritty && \
-        ln -f -s ${DOTFILES_DIR}/alacritty.yml $HOME/.config/alacritty
-      ;;
-  esac
+  if [[ $(_os) == macos ]]; then
+    mkdir -p $XDG_CONFIG_HOME/alacritty && \
+      ln -f -s ${DOTFILES_DIR}/alacritty.yml $XDG_CONFIG_HOME/alacritty
+  fi
 }
 
 install_linux() {
