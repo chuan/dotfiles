@@ -8,7 +8,7 @@ main() {
   read -p "Proceed? [y/N] : " yn
   case $yn in
     Y|y) install;;
-    *) ;;
+    *) exit 0 ;;
   esac
 
   echo "Configuring zsh..."
@@ -20,11 +20,29 @@ main() {
   echo "Configuring vim..."
   config_vim
 
-  echo "Configuring emacs..."
-  config_emacs
+  echo "Installing the following GUI applications:"
+  echo "  - alacritty"
+  echo "  - emacs"
+  read -p "Proceed? [y/N] : " gui
+  case $gui in
+    Y|y) case $(_os) in
+           macos)
+             brew cask ls --versions alacritty || brew cask install alacritty
+             brew cask ls --versions emacs || brew cask install emacs
+             ;;
+           debian)
+             sudo aptitude install -y alacritty emacs
+             ;;
+           *) give_up ;;
+         esac ;;
+    *) exit 0 ;;
+  esac
 
   echo "Configuring alacritty..."
   config_alacritty
+
+  echo "Configuring emacs..."
+  config_emacs
 
   echo "Done."
 }

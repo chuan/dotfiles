@@ -12,9 +12,10 @@ Dev environment configuration files install/backup/restore
     - https://github.com/zsh-users/antigen/issues/659
   - `fzf`: inconsistent installation locations and the need to include the location in `.vimrc` and `.zshrc`
 - Separate work related settings.
-- Do not install any gui applications.
+- Ask before installing any GUI applications.
 
 ## GUI Applications
+The following GUI applications are installed.
 
 ### Mac 
 

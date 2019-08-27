@@ -21,6 +21,12 @@ main() {
   echo "Updating vim..."
   vim +'PlugUpdate --sync' +qa
   vim +'PlugUpgrade --sync' +qa
+
+  if [[ -d $HOME/.emacs.d ]]; then
+    echo "Updating emacs..."
+    git -C $HOME/.emacs.d pull
+    $HOME/.emacs.d/bin/doom refresh
+  fi
 }
 
 update() {
