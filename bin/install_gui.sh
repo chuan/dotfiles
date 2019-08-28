@@ -31,6 +31,7 @@ main() {
 }
 
 config_emacs() {
+  ln -f -s ${DOTFILES_DIR}/.doom.d ${HOME}
   if [[ ! -d $HOME/.emacs.d ]]; then
     git clone https://github.com/hlissner/doom-emacs $HOME/.emacs.d
     git -C $HOME/.emacs.d checkout develop
