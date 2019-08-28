@@ -20,30 +20,6 @@ main() {
   echo "Configuring vim..."
   config_vim
 
-  echo "Installing the following GUI applications:"
-  echo "  - alacritty"
-  echo "  - emacs"
-  read -p "Proceed? [y/N] : " gui
-  case $gui in
-    Y|y) case $(_os) in
-           macos)
-             brew cask ls --versions alacritty || brew cask install alacritty
-             brew cask ls --versions emacs || brew cask install emacs
-             ;;
-           debian)
-             sudo aptitude install -y alacritty emacs
-             ;;
-           *) give_up ;;
-         esac ;;
-    *) exit 0 ;;
-  esac
-
-  echo "Configuring alacritty..."
-  config_alacritty
-
-  echo "Configuring emacs..."
-  config_emacs
-
   echo "Done."
 }
 
@@ -79,17 +55,10 @@ install_mac() {
   brew ls --versions editorconfig || brew install editorconfig
 }
 
-config_alacritty() {
-  if [[ $(_os) == macos ]]; then
-    mkdir -p $XDG_CONFIG_HOME/alacritty && \
-      ln -f -s ${DOTFILES_DIR}/alacritty.yml $XDG_CONFIG_HOME/alacritty
-  fi
-}
-
 install_linux() {
   sudo apt-get update && sudo apt-get -y upgrade
   sudo apt-get -y install aptitude
-  sudo aptitude -y install fd-find ripgrep zsh tmux vim
+  sudo aptitude -y install fd-find ripgrep zsh tmux vim editorconfig
 
   BAT_LATEST_VERSION=0.11.0
   BAT_INSTALLED_VERSION=$(dpkg-query -W bat 2>/dev/null | awk '{ print $2 }')
@@ -122,14 +91,6 @@ config_vim() {
   fi
   ln -f -s ${DOTFILES_DIR}/.vimrc ${HOME}
   vim +'PlugInstall --sync' +qa
-}
-
-config_emacs() {
-  if [[ ! -d $HOME/.emacs.d ]]; then
-    git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-    git -C ~/.emacs.d checkout develop
-    ~/.emacs.d/bin/doom -i quickstart
-  fi
 }
 
 main "$@"
