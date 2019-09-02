@@ -40,8 +40,6 @@ export GOPATH=$HOME/Go
 [ -d $GOPATH ] && export PATH=$PATH:$GOPATH/bin
 [ -d $GOROOT ] && export PATH=$PATH:$GOROOT/bin
 
-[ -d $HOME/.cargo/bin ] && export PATH="$HOME/.cargo/bin:$PATH"
-
 [ -f $HOME/.work.zsh ] && source $HOME/.work.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

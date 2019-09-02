@@ -78,6 +78,7 @@ config_zsh() {
     git clone https://github.com/zsh-users/antigen.git $HOME/.antigen/bundles/zsh-users/antigen
   fi
   ln -f -s ${DOTFILES_DIR}/.zshrc ${HOME}
+  ln -f -s ${DOTFILES_DIR}/.zprofile ${HOME}
 }
 
 config_tmux() {
