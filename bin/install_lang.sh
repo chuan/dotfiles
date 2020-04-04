@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source $(dirname $(which $0))/env.sh
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source ${SCRIPT_DIR}/env.sh
 
 main() {
   set -o errexit
@@ -56,6 +57,9 @@ install_ccls() {
 exec "$XDG_DATA_HOME/ccls/Release/ccls" "\$@"
 EOF
       chmod +x $XDG_BIN_HOME/ccls
+      ;;
+    arch)
+      sudo pacman -S ccls
       ;;
   esac
 }

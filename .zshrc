@@ -32,7 +32,8 @@ case "$OSTYPE" in
   linux*)
     alias ls="ls --color=auto"
     alias fd="fdfind"
-    export GOROOT=/usr/lib/go-1.12
+    #[ -f /etc/arch-release ] && export GOROOT=/usr/lib/go
+    #[ -f /etc/debian-release ] && export GOROOT=/usr/lib/go-1.12
     ;;
 esac
 
