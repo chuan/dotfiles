@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source $(dirname $(which $0))/env.sh
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source ${SCRIPT_DIR}/env.sh
 
 main() {
   set -o errexit
@@ -26,7 +27,8 @@ main() {
 install() {
   case $(_os) in
     macos) install_mac ;;
-    debian) install_linux ;;
+    debian) install_debian ;;
+    arch) install_arch ;;
     *) give_up ;;
   esac
 }
@@ -55,7 +57,7 @@ install_mac() {
   brew ls --versions editorconfig || brew install editorconfig
 }
 
-install_linux() {
+install_debian() {
   sudo apt-get update && sudo apt-get -y upgrade
   sudo apt-get -y install aptitude
   sudo aptitude -y install fd-find ripgrep zsh tmux vim editorconfig
@@ -71,6 +73,12 @@ install_linux() {
     echo "bat ${BAT_INSTALLED_VERSION} is already installed. Skipping..."
   fi
 }
+
+install_arch() {
+  sudo pacman -Syu
+  sudo pacman -S fd ripgrep bat zsh tmux vim editorconfig-core-c
+}
+
 
 config_zsh() {
   if [[ ! -d $HOME/.antigen/bundles/zsh-users/antigen ]]; then

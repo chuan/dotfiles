@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source $(dirname $(which $0))/env.sh
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source ${SCRIPT_DIR}/env.sh
 
 main() {
   set -o errexit
@@ -17,6 +18,9 @@ main() {
              ;;
            debian)
              sudo aptitude install -y alacritty emacs
+             ;;
+           arch)
+             sudo pacman -S alacritty emacs
              ;;
            *) give_up ;;
          esac ;;
@@ -35,7 +39,7 @@ config_emacs() {
   if [[ ! -d $HOME/.emacs.d ]]; then
     git clone https://github.com/hlissner/doom-emacs $HOME/.emacs.d
     git -C $HOME/.emacs.d checkout develop
-    $HOME/.emacs.d/bin/doom quickstart
+    $HOME/.emacs.d/bin/doom install
   fi
 }
 

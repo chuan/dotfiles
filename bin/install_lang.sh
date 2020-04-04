@@ -27,6 +27,8 @@ install_golang() {
     debian)
       sudo aptitude install -y golang-1.12
       ;;
+    arch)
+      sudo pacman -S go
   esac
   go get -u golang.org/x/tools/gopls
 }

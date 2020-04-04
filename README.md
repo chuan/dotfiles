@@ -5,7 +5,8 @@ Dev environment configuration files install/backup/restore
 - Simple install/backup/restore.
 - Support the following development environments.
   - macOS
-  - Pop!_OS
+  - Ubuntu/Pop!_OS
+  - Arch Linux
 - Rely on OS package manager whenever possible. Exceptions:
   - `antigen`:
     - https://bugs.launchpad.net/ubuntu/+source/zsh-antigen/+bug/1770915
