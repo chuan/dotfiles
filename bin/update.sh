@@ -32,7 +32,8 @@ main() {
 update() {
   case $(_os) in
     macos) update_mac ;;
-    debian) update_linux ;;
+    debian) update_debian ;;
+    arch) update_arch ;;
     *) give_up ;;
   esac
 }
@@ -46,8 +47,13 @@ update_mac() {
   brew update && brew upgrade
 }
 
-update_linux() {
+update_debian() {
   sudo aptitude update && sudo aptitude upgrade
 }
+
+update_arch() {
+  sudo pacman -Syu
+}
+
 
 main "$@"

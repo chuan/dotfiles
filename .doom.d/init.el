@@ -66,7 +66,7 @@
        ;;eshell            ; a consistent, cross-platform shell (WIP)
        ;;shell             ; a terminal REPL for Emacs
        ;;term              ; terminals in Emacs
-       ;;vterm             ; another terminals in Emacs
+       vterm             ; another terminals in Emacs
 
        :tools
        ;;ansible
@@ -90,7 +90,7 @@
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;terraform         ; infrastructure as code
-       ;;tmux              ; an API for interacting with tmux
+       tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
        ;;wakatime
 
