@@ -17,7 +17,7 @@ main() {
              brew cask ls --versions emacs || brew cask install emacs
              ;;
            debian)
-             sudo aptitude install -y alacritty emacs
+             sudo aptitude install -y alacritty emacs plantuml hunspell
              ;;
            arch)
              sudo pacman -S alacritty emacs
