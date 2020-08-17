@@ -2,7 +2,17 @@
 
 ;; Place your private configuration here
 
-(use-package! flatbuffers-mode :mode "\\.fbs")
+(use-package flatbuffers-mode
+  :defer t
+  :mode ("\\.fbs\\'" . flatbuffers-mode))
+
+(use-package bison-mode
+  :defer t
+  :mode (("\\.yy?\\'" . bison-mode)
+          ("\\.ll?\\'" . bison-mode))
+  :config
+  (setq bison-rule-separator-column 0)
+  (setq bison-rule-enumeration-column 2))
 
 (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
 

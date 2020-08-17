@@ -25,7 +25,7 @@ main() {
   if [[ -d $HOME/.emacs.d ]]; then
     echo "Updating emacs..."
     git -C $HOME/.emacs.d pull
-    $HOME/.emacs.d/bin/doom refresh
+    $HOME/.emacs.d/bin/doom sync
   fi
 }
 

@@ -9,3 +9,6 @@
 
 (package! flatbuffers-mode
   :recipe (:host github :repo "Asalle/flatbuffers-mode"))
+
+(package! bison-mode
+  :recipe (:host github :repo "Wilfred/bison-mode"))
