@@ -32,6 +32,10 @@ main() {
 
   echo "Configuring emacs..."
   config_emacs
+
+  echo "Configuring Chinese input..."
+  ln -f -s ${DOTFILES_DIR}/.pam_environment ${HOME}
+  flatpak override --user --env=QT_IM_MODULE=ibus org.telegram.desktop
 }
 
 config_emacs() {
