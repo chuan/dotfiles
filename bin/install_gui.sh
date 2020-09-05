@@ -20,7 +20,7 @@ main() {
              sudo aptitude install -y alacritty emacs plantuml hunspell
              ;;
            arch)
-             sudo pacman -S alacritty emacs
+             sudo pacman -S alacritty emacs noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-roboto ttf-roboto-mono
              ;;
            *) give_up ;;
          esac ;;
@@ -34,8 +34,10 @@ main() {
   config_emacs
 
   echo "Configuring Chinese input..."
-  ln -f -s ${DOTFILES_DIR}/.pam_environment ${HOME}
-  flatpak override --user --env=QT_IM_MODULE=ibus org.telegram.desktop
+  config_chinese_input
+
+  echo "Configuring fonts..."
+  config_fonts
 }
 
 config_emacs() {
@@ -52,6 +54,16 @@ config_alacritty() {
     mkdir -p $XDG_CONFIG_HOME/alacritty && \
       ln -f -s ${DOTFILES_DIR}/alacritty.yml $XDG_CONFIG_HOME/alacritty
   fi
+}
+
+config_chinese_input() {
+  ln -f -s ${DOTFILES_DIR}/.pam_environment ${HOME}
+  flatpak override --user --env=QT_IM_MODULE=ibus org.telegram.desktop
+}
+
+config_fonts() {
+  mkdir -p $XDG_CONFIG_HOME/fontconfig && \
+    ln -f -s ${DOTFILES_DIR}/fonts.conf $XDG_CONFIG_HOME/fontconfig
 }
 
 main "$@"
