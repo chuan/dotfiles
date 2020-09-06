@@ -46,4 +46,4 @@
 
 ;; LSP
 (setq lsp-auto-guess-root nil)
-
+(setq lsp-keymap-prefix "s-l")
