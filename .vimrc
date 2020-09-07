@@ -3,6 +3,9 @@
 " Initialize plugin system
 call plug#begin('~/.vim/plugged')
 
+" Nord theme
+Plug 'arcticicestudio/nord-vim'
+
 " The NERD tree: file explorer
 Plug 'scrooloose/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
@@ -86,7 +89,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 if has("gui_running")
-  colorscheme evening
+  colorscheme nord
   :set guioptions-=m
   :set guioptions-=T
   :set guioptions-=r
@@ -97,6 +100,6 @@ if has("gui_running")
   elseif has("mac")
     set guifont="SF Mono"
   else
-    set guifont=Hack\ 10
+    set guifont=Iosevka\ Extended\ 12
   endif
 endif

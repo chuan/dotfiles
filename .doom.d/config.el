@@ -26,6 +26,9 @@
 
 (add-hook 'kill-emacs-hook #'save-frame-dimensions)
 
+;; Theme
+(setq doom-theme 'doom-nord)
+
 ;; FlatBuffers
 (use-package flatbuffers-mode
   :defer t
