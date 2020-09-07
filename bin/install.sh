@@ -90,6 +90,7 @@ config_zsh() {
 }
 
 config_tmux() {
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   ln -f -s ${DOTFILES_DIR}/.tmux.conf ${HOME}
 }
 
