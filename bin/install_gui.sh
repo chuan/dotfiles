@@ -50,10 +50,8 @@ config_emacs() {
 }
 
 config_alacritty() {
-  if [[ $(_os) == macos ]]; then
-    mkdir -p $XDG_CONFIG_HOME/alacritty && \
-      ln -f -s ${DOTFILES_DIR}/alacritty.yml $XDG_CONFIG_HOME/alacritty
-  fi
+  mkdir -p $XDG_CONFIG_HOME/alacritty && \
+    ln -f -s ${DOTFILES_DIR}/alacritty.yml $XDG_CONFIG_HOME/alacritty
 }
 
 config_pam_env() {
