@@ -54,6 +54,7 @@
   :hook
   (lsp-mode . lsp-enable-which-key-integration))
 (setq gc-cons-threshold 1000000000) ; 1000MB
-(setq read-process-output-max (* 1024 1024)) ;; 1MB
-(setq lsp-completion-provider :capf)
-(setq lsp-idle-delay 0.500)
+(setq read-process-output-max (* 2048 2048)) ;; 4MB
+
+;; C++
+(add-to-list 'auto-mode-alist '("\\.inc\\'" . c++-mode))
