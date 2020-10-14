@@ -48,13 +48,12 @@
 (setq plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
 
 ;; LSP
+(setq lsp-keymap-prefix "s-l")
 (use-package lsp-mode
   :hook
   (lsp-mode . lsp-enable-which-key-integration)
   :config
-  (setq lsp-keymap-prefix "s-l")
   (setq lsp-auto-guess-root nil)
-  (setq gc-cons-threshold 1000000000) ; 1000MB
   (setq read-process-output-max (* 2048 2048)) ;; 4MB
   (setq lsp-clients-clangd-args '("--clang-tidy"))
   )
