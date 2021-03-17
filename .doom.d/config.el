@@ -56,6 +56,8 @@
   (setq lsp-auto-guess-root nil)
   (setq read-process-output-max (* 2048 2048)) ;; 4MB
   (setq lsp-clients-clangd-args '("--clang-tidy"))
+  :custom
+  (lsp-headerline-breadcrumb-enable t)
   )
 
 ;; C++
