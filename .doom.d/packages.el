@@ -12,3 +12,6 @@
 
 (package! bison-mode
   :recipe (:host github :repo "Wilfred/bison-mode"))
+
+(package! tree-sitter)
+(package! tree-sitter-langs)
