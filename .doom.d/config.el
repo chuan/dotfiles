@@ -63,9 +63,17 @@
 ;; C++
 (add-to-list 'auto-mode-alist '("\\.inc\\'" . c++-mode))
 
+;; When a file has lines longer than so-long-threshold, so-long mode is enabled.
+;; This prevents files with long lines from slowing down emacs. Doom sets this
+;; to 400, which is too small for me.
+(after! so-long
+  (setq so-long-threshold 1028))
+
 ;; Tree sitter
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; (use-package! tree-sitter
+;;   :config
+;;   (require 'tree-sitter-langs)
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(setq doom-scratch-initial-major-mode 'org-mode)
