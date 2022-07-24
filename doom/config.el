@@ -3,8 +3,8 @@
 ;; Place your private configuration here
 
 ;; Fonts
-(setq doom-font (font-spec :family "monospace" :size 14 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "sans" :size 14))
+;(setq doom-font (font-spec :family "monospace" :size 14 :weight 'semi-light)
+;      doom-variable-pitch-font (font-spec :family "sans" :size 14))
 
 ;; Persist Emacs’ initial frame position, dimensions and/or full-screen state across sessions
 (when-let (dims (doom-store-get 'last-frame-size))
