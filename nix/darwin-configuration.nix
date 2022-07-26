@@ -29,7 +29,7 @@
     stow
     xcpretty
     graphviz
-    hunspell
+    (hunspellWithDicts (with hunspellDicts; [ en_US en_US-large ]))
   ];
   
   # Hide the dock automatically
