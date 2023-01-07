@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+DOTFILES_DIR=${HOME}/.dotfiles
+
 main() {
   set -o errexit
 
@@ -11,9 +13,6 @@ main() {
 
   echo "Configuring vim..."
   config_vim
-
-  echo "Configuring alacritty..."
-  config_alacritty
 
   echo "Configuring emacs..."
   config_emacs
@@ -37,12 +36,11 @@ install() {
 }
 
 config_zsh() {
-  if [[ ! -d $HOME/.antigen/bundles/zsh-users/antigen ]]; then
-    mkdir -p $HOME/.antigen/bundles/zsh-users/antigen
-    git clone git@github.com:zsh-users/antigen.git $HOME/.antigen/bundles/zsh-users/antigen
+  if [[ ! -d $HOME/.zplug ]]; then
+    mkdir -p $HOME/.zplug
+    git clone https://github.com/zplug/zplug $HOME/.zplug
   fi
   install zsh
-  ${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh
 }
 
 config_tmux() {
@@ -51,11 +49,12 @@ config_tmux() {
     git clone git@github.com:tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
   install tmux
+  ${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh
 }
 
 config_vim() {
-  if [[ ! -f  ~/.vim/autoload/plug.vim ]]; then
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  if [[ ! -f  $HOME/.vim/autoload/plug.vim ]]; then
+    curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
   install vim
@@ -72,11 +71,6 @@ config_emacs() {
     git clone git@github.com:hlissner/doom-emacs $HOME/.emacs.d
     $HOME/.emacs.d/bin/doom install
   fi
-}
-
-config_alacritty() {
-  mkdir -p $HOME/.config/alacritty && \
-    install alacritty .config/alacritty
 }
 
 main "$@"
