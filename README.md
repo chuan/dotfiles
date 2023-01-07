@@ -1,8 +1,16 @@
 # Configuration
 Dev environment configuration files
 
-## GUI Applications
-The following GUI applications are installed.
-
-- alacritty
+The following packages are installed via an OS package manager.
+- fd
+- htop
+- ripgrep
+- tmux
+- tree
+- jq
+- stow
+- xcpretty
+- graphviz
+- virtualenv
+- hunspell
 - emacs

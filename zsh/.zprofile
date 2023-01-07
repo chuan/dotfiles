@@ -5,3 +5,8 @@
 [ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+export LIBRARY_PATH="$(xcrun --show-sdk-path)/usr/lib:$(brew --prefix)/lib"
+
